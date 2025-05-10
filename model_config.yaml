@@ -1,0 +1,23 @@
+model:
+
+    model_name: "bert-base-uncased" # Medical-specific BERT
+    num_labels: 773                                # For 5 disease classes
+    dropout: 0.2
+    freeze_encoder: true                           # Freeze base layers
+    class_weight: # Handle imbalanced data
+      0: 1.0                                       # Class 0 weight
+      1: 2.5                                       # Rare class gets higher weight
+
+training:
+  batch_size: 512
+  epochs: 10
+  learning_rate: 2e-5
+  max_seq_length: 128
+data:
+
+    raw_dataset_path: "D:/Pyty/data/raw/dataset.csv"  # Single dataset file
+    test_size: 0.2                       # Fraction for test split (e.g., 20%)
+    random_state: 42                      # For reproducible splits
+    max_seq_length: 128
+    train_path: "D:/Pyty/data/processed/train.csv"
+    test_path: "D:/Pyty/data/processed/test.csv"
